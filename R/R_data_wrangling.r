@@ -1,6 +1,9 @@
 library(dplyr)
 
-setwd("c:\\ds\\git\\demos\\r")
+#Mac
+setwd("~/git/Demos/R")
+#Windows
+#setwd("c:\\ds\\git\\demos\\r")
 
 #Vector Operations
 ## Add 3
@@ -73,11 +76,32 @@ dim(espn.rb)
 dim(espn.rb)[1]
 
 #Write to csv
+written.csv <- "auto.written1.csv"
+write.csv(used.cars, written.csv)
+dim(used.cars)
+dim(read.csv(written.csv))
+write.csv(read.csv(written.csv), "auto.written2.csv")
+dim(read.csv("auto.written2.csv"))
+read.csv("auto.written2.csv")
 
 #Read another csv
+used.cars.accidents <- read.csv("used_cars_accidents.csv")
+used.cars.accidents
+str(used.cars.accidents)
+
+?left_join
+used.cars.all <- left_join(used.cars, used.cars.accidents, by="ID")  ## OOPS
+used.cars.all <- left_join(used.cars, used.cars.accidents, by=c("id" = "ID"))
+str(used.cars.all)
+used.cars.all
+sum(used.cars.all$ACCIDENTS)
+##OOPS - NA??  We should clean this data by removing the bad record
 
 #Analyze data
 #BAD DATA
+used.cars.accidents
+#count the number of NAs in the ACCIDENTS column
+length(used.cars.all$ACCIDENTS[is.na(used.cars.all$ACCIDENTS)])
 
 
 #join data

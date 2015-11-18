@@ -18,7 +18,6 @@ doorbusters.out.of.stock <- launch.items %>% mutate(db.oos = ifelse( door.buster
 doorbusters.out.of.stock <- launch.items %>% mutate(db.oos = get.metric.door.buster.offline(launch.items))
 length(doorbusters.out.of.stock[doorbusters.out.of.stock$db.oos==1,"db.oos"])
 
-doorbusters.out.of.stock <- doorbusters.out.of.stock %>% select(id, )
 
 ### THAT WAS ALL WAY TOO HARD TO FIGURE OUT  ###
 ### WITH 40,000 RECORDS, HOW CAN I VERIFY THEM ALL?? ###
@@ -36,3 +35,11 @@ source("launch_items_wrangle.r")
 launch.items.with.metrics <- launch.items %>% mutate(db.oos = get.metric.door.buster.out.of.stock(launch.items)) %>%
                                               mutate(active.offline = get.metric.active.offline(launch.items)) %>%
                                               select(id, door.buster, in.stock, db.oos, status, is.online, active.offline)
+
+
+
+
+
+
+
+

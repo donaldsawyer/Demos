@@ -1,9 +1,9 @@
 library(dplyr)
 
 #Mac
-setwd("~/git/Demos/R")
+#setwd("~/git/Demos/R")
 #Windows
-#setwd("c:\\ds\\git\\demos\\r")
+setwd("c:\\ds\\git\\demos\\r")
 
 #Vector Operations
 ## Add 3
@@ -94,27 +94,36 @@ used.cars.all <- left_join(used.cars, used.cars.accidents, by="ID")  ## OOPS
 used.cars.all <- left_join(used.cars, used.cars.accidents, by=c("id" = "ID"))
 str(used.cars.all)
 used.cars.all
+
 sum(used.cars.all$ACCIDENTS)
 ##OOPS - NA??  We should clean this data by removing the bad record
 
 #Analyze data
 #BAD DATA
 used.cars.accidents
+
 #count the number of NAs in the ACCIDENTS column
-length(used.cars.all$ACCIDENTS[is.na(used.cars.all$ACCIDENTS)])
+length(used.cars.all$ACCIDENTS[ is.na(used.cars.all$ACCIDENTS) ])
+
+#Convert the NAs to 0?
+used.cars.all <- used.cars.all %>% mutate(new.accidents = ifelse(is.na(ACCIDENTS), 0, ACCIDENTS))
+used.cars.all
+
+#What if I want to just replace the ACCIDENTS column in place?
+used.cars.all <- used.cars.all %>% mutate(ACCIDENTS = ifelse(is.na(ACCIDENTS), 0, ACCIDENTS))
+used.cars.all
+## Remove the unused column
+used.cars.all <- used.cars.all %>% select(-new.accidents)
+used.cars.all
+#I only want to see the VIN, miles, ACCIDENTS, year
+used.cars.all %>% select(VIN, miles, ACCIDENTS, year)
+
+#I want to see the average number of miles of cars, by year
+used.cars.all %>% group_by(year) %>% summarise(mean(miles))
+
+# What about querying a database?
 
 
-#join data
-
-#mutate data
-
-
-#SOLID
-#Functions
-
-#TDD
-
-# Test Driver
 
 
 #BONUS

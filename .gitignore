@@ -1,0 +1,4 @@
+*.RData
+R/.Rhistory
+.idea
+out

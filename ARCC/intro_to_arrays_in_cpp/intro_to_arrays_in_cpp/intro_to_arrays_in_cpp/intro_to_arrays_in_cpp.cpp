@@ -222,6 +222,10 @@ void initializeArrayDemo()
 	printSingleDimensionalArrayToCout(array3, 3, ARRAY_3_NAME);
 	doWaitForInput("Press any key and hit enter to initialize array3...");
 
+	cout << "\tfor (int i = 0; i < 3; ++i)" << endl
+		<< "\t{" << endl
+		<< "\t\tarray3[i] = 0;" << endl
+		<< "\t}" << endl << endl;
 	for (int i = 0; i < 3; ++i)
 	{
 		array3[i] = 0;
@@ -235,6 +239,10 @@ void initializeArrayDemo()
 	printSingleDimensionalArrayToCout(array7, 7, ARRAY_7_NAME);
 	doWaitForInput("Press any key and hit enter to initialize array7...");
 
+	cout << "\tfor (int i = 0; i < 7; ++i)" << endl
+		<< "\t{" << endl
+		<< "\t\tarray7[i] = i + 1;" << endl
+		<< "\t}" << endl << endl;
 	for (int i = 0; i < 7; ++i)
 	{
 		array7[i] = i + 1;
@@ -244,13 +252,14 @@ void initializeArrayDemo()
 
 	// Initialization using explicit values //
 	doWaitForInput("Press any key and hit enter to initialize array5...");
+	cout << "\tint array5[] = { 5, 10, 15, 20, 25 };" << endl << endl;
 	int array5[] = { 5, 10, 15, 20, 25 };
 	cout << "Size of " << ARRAY_5_NAME << ": " << sizeof(array5) << endl;;
 	
 	doWaitForInput("Press any key and hit enter to view initialized array5...");
 	printSingleDimensionalArrayToCout(array5, 5, ARRAY_5_NAME);
 
-	cout << endl << "INITIALIZE ARRAYS DEMO COMPLETE" << endl;
+	cout << endl << "INITIALIZE ARRAYS DEMO COMPLETE" << endl << endl;
 }
 
 void accessingArrayDemo()
@@ -258,6 +267,12 @@ void accessingArrayDemo()
 	doWaitForInput("Press any key and hit enter to initialize array3[3] and array7[7]...");
 
 	// Initialize two arrays //
+	cout << "\tint array3[] = { 10, 20, 30 };" << endl
+		<< "\tint *array7 = new int[7];" << endl
+		<< "\tfor (int i = 0; i < 7; ++i)" << endl
+		<< "\t{" << endl
+		<< "\t\tarray7[i] = (i + 1) * 11;" << endl
+		<< "\t}" << endl << endl;
 	int array3[] = { 10, 20, 30 };
 	int *array7 = new int[7];
 	for (int i = 0; i < 7; ++i)
@@ -270,47 +285,62 @@ void accessingArrayDemo()
 
 	doWaitForInput("Press any key and hit enter to access array3[] using an index...");
 	cout << "Number of elements in array3[]: 3" << endl << endl;
+	// PRINT THE CODE FOR THE LOOP //
+	cout << "\tint indexToAccess = 0;" << endl
+		<< "\twhile (true)" << endl
+		<< "\t{" << endl
+		<< "\t\tcout << \"Enter an index to get the memory location and value of the array element(negative number to continue) : \";" << endl
+		<< "\t\tcin >> indexToAccess;" << endl
+		<< "\t\tif (indexToAccess < 0) break; " << endl
+		<< "\t\tcout << &(array3[indexToAccess]) << \" [\" << (int)(&(array3[indexToAccess])) << \"]: \" << array3[indexToAccess] << endl;" << endl
+		<< "\t}" << endl << endl;
+	// END CODE PRINT //
 	int indexToAccess = 0;
 	while (true)
 	{
 		cout << "Enter an index to get the memory location and value of the array element (negative number to continue): ";
 		cin >> indexToAccess;
-		if (indexToAccess < 0) break;
-		try {
-			cout << &(array3[indexToAccess]) << " [" << (int)(&(array3[indexToAccess])) << "]: " << array3[indexToAccess] << endl;
-		}
-		catch (...)
-		{
-			cout << "Exception while accessing the array with index " << indexToAccess << endl;
-			indexToAccess = -1;
-		}
+		if (indexToAccess < 0) break; 
+		cout << &(array3[indexToAccess]) << " [" << (int)(&(array3[indexToAccess])) << "]: " << array3[indexToAccess] << endl;
 	}
 
 	doWaitForInput("Press any key and hit enter to access array3[] using integer addition...");
+	// PRINT THE CODE FOR THE LOOP //
+	cout << "\tint byteOffset = 0;" << endl
+		<< "\tcout << \"Size of integer : \" << sizeof(byteOffset) << \"bytes.\" << endl << endl;" << endl
+		<< "\twhile (true)" << endl
+		<< "\t{" << endl
+		<< "\t\tcout << \"Enter an integer to access array3[] using a memory offset (negative number to skip): \";" << endl
+		<< "\t\tcin >> byteOffset;" << endl
+		<< "\t\tif (byteOffset < 0) break;" << endl
+		<< "\t\tcout << array3 + byteOffset << \"[\" << (int)(array3 + byteOffset) << \"]: \" << *(array3 + byteOffset) << endl;" << endl
+		<< "\t\tcout << &array3 + byteOffset << \"[\" << (int)(&array3 + byteOffset) << \"]: \" << *(&array3 + byteOffset) << endl;" << endl
+		<< "\t}" << endl << endl;
+	// 	END CODE PRINT //
 	int byteOffset = 0;
 	cout << "Size of integer: " << sizeof(byteOffset) << "bytes." << endl << endl;
 	while (true)
 	{
-		cout << "Enter an integer to access array3[] using a memory offset: ";
+		cout << "Enter an integer to access array3[] using a memory offset (negative number to skip): ";
 		cin >> byteOffset;
 		if (byteOffset < 0) break;
 		cout << array3 + byteOffset << " [" << (int)(array3 + byteOffset) << "]: " << *(array3 + byteOffset) << endl;
 		cout << &array3 + byteOffset << " [" << (int)(&array3 + byteOffset) << "]: " << *(&array3 + byteOffset) << endl;
 	}
 
-	cout << endl << "ACCESSING ARRAYS DEMO COMPLETE" << endl;
+	cout << endl << "ACCESSING ARRAYS DEMO COMPLETE" << endl << endl;
 }
 
 void multidimensionalArrayDemo()
 {
 	doWaitForInput("Press any key and hit enter to intiialize a 2-d array array2d[3][4]...");
-	cout << "int array2d[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };" << endl;
+	cout << "\tint array2d[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };" << endl;
 	int array2d[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };
 	
 	doWaitForInput("Press any key and hit enter to view the contents of array2d[3][4] using a loop...");
-	cout << "for (int row = 0; row < 3; ++row)" << endl << "{" << endl
-		<< "\tfor (int col = 0; col < 4; ++col)" << endl << "\t{" << endl
-		<< "\t\tcout << array2d[row][col] << \"\\t\";" << endl << "\t}" << endl << "\tcout << endl;" << endl << "}" << endl << endl;
+	cout << "\tfor (int row = 0; row < 3; ++row)" << endl << "\t{" << endl
+		<< "\t\tfor (int col = 0; col < 4; ++col)" << endl << "\t\t{" << endl
+		<< "\t\t\tcout << array2d[row][col] << \"\\t\";" << endl << "\t\t}" << endl << "\t\tcout << endl;" << endl << "\t}" << endl << endl;
 	for (int row = 0; row < 3; ++row)
 	{
 		for (int col = 0; col < 4; ++col)
@@ -322,6 +352,12 @@ void multidimensionalArrayDemo()
 	cout << endl;
 
 	doWaitForInput("Press any key and hit enter to view the memory locations of each element in array2d[3][4]...");
+	// PRINT CODE //
+	cout << "\tfor (int row = 0; row < 3; ++row)" << endl << "\t{" << endl
+		<< "\t\tfor (int col = 0; col < 4; ++col)" << endl << "\t\t{" << endl
+		<< "\t\t\tcout << \"array2d[\" << row << \"][\" << col << \"]: \" << &(array2d[row][col]) << \" (\" << (int)(&(array2d[row][col])) << \")\" << endl << endl; "
+		<< "\t\t}" << endl << "\t}" << endl << endl;
+	// END PRINT CODE //
 	for (int row = 0; row < 3; ++row)
 	{
 		for (int col = 0; col < 4; ++col)
@@ -331,30 +367,44 @@ void multidimensionalArrayDemo()
 	}
 
 	doWaitForInput("Press any key and hit enter to view the memory locations for the start of each row...");
+	// PRINT CODE //
+	cout << "\tfor (int row = 0; row < 3; ++row)" << endl << "\t{" << endl
+		<< "\t\tcout << \"array2d[\" << row << \"]: \" << &(array2d[row]) << \" (\" << (int)(&(array2d[row])) << \")\" << endl << endl;" << endl
+		<< "\t}" << endl << endl;
+	// END PRINT CODE //
 	for (int row = 0; row < 3; ++row)
 	{
 		cout << "array2d[" << row << "]: " << &(array2d[row]) << " (" << (int)(&(array2d[row])) << ")" << endl << endl;
 	}
 
 	doWaitForInput("Press any key and hit enter to view the memory locations for the start of each column...");
+	// PRINT CODE //
+	cout << "\tfor (int col = 0; col < 4; ++col)" << endl << "\t{" << endl
+		<< "\t\tcout << \"(*array2d)[\" << col << \"]: \" << &((*array2d)[col]) << \" (\" << (int)(&((*array2d)[col])) << \")\" << endl << endl;" << endl
+		<< "\t}" << endl << endl;
+	// END PRINT CODE //
 	for (int col = 0; col < 4; ++col)
 	{
 		// Access the first row as a pointer //
 		cout << "(*array2d)[" << col << "]: " << &((*array2d)[col]) << " (" << (int)(&((*array2d)[col])) << ")" << endl << endl;
 	}
+
+	cout << "MULTI-DIMENSIONAL ARRAY DEMO COMPLETE!" << endl << endl;
 }
 
 void arraysAsFunctionParametersDemo()
 {
 	doWaitForInput("Press any key and hit enter to pass array3[3] to a function that prints the array information...");
-	cout << "int array3[3] = { 2, 4, 6 };" << endl;
+	cout << "\tint array3[3] = { 2, 4, 6 };" << endl;
 	int array3[3] = { 2, 4, 6 };
 	print1dArrayInfo(array3, 3);
 
 	doWaitForInput("Press any key and hit enter to pass array3_2[3][2] to a function that prints the array information...");
 	int array3_2[3][2] = { {1, 11}, {2, 22}, {3, 33} };
-	cout << "int array3_2[3][2] = { {1, 11}, {2, 22}, {3, 33} };" << endl;
+	cout << "\tint array3_2[3][2] = { {1, 11}, {2, 22}, {3, 33} };" << endl;
 	print2dArrayInfo(array3_2, 3);
+
+	cout << "ARRAYS AS FUNCTION PARAMETERS DEMO COMPLETE!" << endl << endl;
 }
 
 void returnArrayFromFunctionsDemo()
@@ -374,6 +424,8 @@ void returnArrayFromFunctionsDemo()
 	doWaitForInput("Press any key and hit enter to print the contents of array2d...");
 	cout << "\tprint2dArrayInfo_2(array2d, 2);" << endl;
 	print2dArrayInfo_2(array2d, 2);
+
+	cout << "ARRAYS AS FUNCTION RETURN VALUES COMPLETE!" << endl << endl;
 }
 
 void cstringArrayDemo()
@@ -406,7 +458,7 @@ void cstringArrayDemo()
 
 	doWaitForInput("Press any key and hit enter to initialize a character array using an initializer list...");
 	char s3[] = { 'b', 'l', 'a', 'h', '\0' };
-	cout << "\tchar s3[] = { 'b', 'l', 'a', 'h', '\0' };" << endl;
+	cout << "\tchar s3[] = { 'b', 'l', 'a', 'h', '\\	0' };" << endl;
 	cout << "\tsizeof(s3): " << sizeof(s3) << endl;
 	doWaitForInput("Press any key and hit enter to print s3 to cout...");
 	cout << "\tcout << \"\\t\" << s3 << endl;" << endl;
@@ -421,4 +473,6 @@ void cstringArrayDemo()
 	cout << "\t" << s2 << endl;
 
 	cout << endl;
+
+	cout << "C STRING ARRAY DEMO COMPLETE!" << endl << endl;
 }

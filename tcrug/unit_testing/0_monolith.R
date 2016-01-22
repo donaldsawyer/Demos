@@ -1,7 +1,7 @@
 #install.packages("dplyr")
 library(dplyr)
 
-setwd("c:/ds/git/demos/tcrug/unit_testing")
+#setwd("c:/ds/git/demos/tcrug/unit_testing")
 
 doorbusters1.csv = "doorbusters1.csv"
 doorbusters1.data <- read.csv(doorbusters1.csv, stringsAsFactors = FALSE, colClasses = "character")

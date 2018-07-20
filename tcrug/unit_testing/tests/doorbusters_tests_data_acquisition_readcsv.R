@@ -1,5 +1,3 @@
-#?defineTestSuite
-
 doorbusters.names.in.csv <- c("id", "door buster", "in stock", "is online", "launch date", "has image",
                               "status code", "status", "Has Price", "Price")
 
